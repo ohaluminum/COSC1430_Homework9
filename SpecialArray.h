@@ -7,10 +7,11 @@ using namespace std;
 #define SpecialArray_H
 
 template<typename T>
-class SpeialArray
+class SpecialArray
 {
 private:
-	T** 2DArr;
+
+	T **Arr2D;
 	int numRow;
 	int numCol;
 
@@ -19,7 +20,7 @@ public:
 	//Default constructor: sets the array pointer to null and both numbers of rows and columns to zero.
 	SpecialArray()
 	{
-		2DArr = nullptr;
+		Arr2D = nullptr;
 		numRow = 0;
 		numCol = 0;
 	}
@@ -31,10 +32,10 @@ public:
 		numCol = col;
 
 		//How to declare a dynamic 2D Array: https://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
-		2DArr = new T*[numRow];
+		Arr2D = new T*[numRow];
 		for (int i = 0; i < numRow; i++)
 		{
-			2DArr[i] = new T[numCol];
+			Arr2D[i] = new T[numCol];
 		}
 	}
 
@@ -44,11 +45,11 @@ public:
 		//How to deallocate dynamic 2D Array: http://www.cplusplus.com/forum/beginner/38226/
 		for (int i = 0; i < numRow; i++)
 		{
-			delete[] 2DArr[i];
+			delete[] Arr2D[i];
 		}
 
-		delete[] 2DArr;
-		2DArr = nullptr;
+		delete[] Arr2D;
+		Arr2D = nullptr;
 	}
 
 	/*
@@ -56,13 +57,13 @@ public:
 	 *This function will take the ifstream variable as a parameter (assume the variable already has an associated file open)
 	 *I have open/closed the file in main/unit tests, so you will not need to worry about that.
    	 */
-	void readFile(ifstream inFS)
+	void readFile(ifstream& inFS)
 	{
 		for (int i = 0; i < numRow; i++)
 		{
 			for (int j = 0; j < numCol; j++)
 			{
-				inFS >> 2DArr[i][j];
+				inFS >> Arr2D[i][j];
 			}
 		}
 	}
@@ -70,15 +71,15 @@ public:
 	//A function called max with empty argument list that returns the value of the maximum element in the array.
 	T max()
 	{
-		T max = 2DArr[0][0];
+		T max = Arr2D[0][0];
 
 		for (int i = 0; i < numRow; i++)
 		{
 			for (int j = 0; j < numCol; j++)
 			{
-				if (2DArr[i][j] > max)
+				if (Arr2D[i][j] > max)
 				{
-					max = 2DArr[i][j];
+					max = Arr2D[i][j];
 				}
 			}
 		}
@@ -88,15 +89,15 @@ public:
 	//A function called min with empty argument list that returns the value of minimum element in the array.
 	T min()
 	{
-		T min = 2DArr[0][0];
+		T min = Arr2D[0][0];
 
 		for (int i = 0; i < numRow; i++)
 		{
 			for (int j = 0; j < numCol; j++)
 			{
-				if (2DArr[i][j] < min)
+				if (Arr2D[i][j] < min)
 				{
-					min = 2DArr[i][j];
+					min = Arr2D[i][j];
 				}
 			}
 		}
@@ -118,11 +119,11 @@ public:
 			{
 				for (int z = 0; z < numCol - 1 - y; z++)
 				{
-					if (2DArr[x][z] > 2DArr[x][z + 1])
+					if (Arr2D[x][z] > Arr2D[x][z + 1])
 					{
-						temp = 2DArr[x][z];
-						2DArr[x][z] = 2DArr[x][z + 1];
-						2DArr[x][z + 1] = temp;
+						temp = Arr2D[x][z];
+						Arr2D[x][z] = Arr2D[x][z + 1];
+						Arr2D[x][z + 1] = temp;
 					}	
 				}
 			}
@@ -137,11 +138,11 @@ public:
 	{
 		for (int i = 0; i < numRow; i++)
 		{
-			for (int j = 0; j < numCol - 1; j++)
+			for (int j = 0; j < numCol; j++)
 			{
-				cout << 2DArr[i][j] << " ";
+				cout << Arr2D[i][j] << " ";
 			}
-			cout << 2DArr[i][numCol - 1] << endl;
+			cout << endl;
 		}
 	}
 
@@ -155,16 +156,13 @@ public:
 		{
 			for (int j = 0; j < numCol - 1; j++)
 			{
-				outFS << 2DArr[i][j] << " ";
+				outFS << Arr2D[i][j] << " ";
 			}
-			outFS << 2DArr[i][numCol - 1] << endl;
+			outFS << Arr2D[i][numCol - 1] << endl;
 		}
-
 		outFS.close();
 	}
 };
-
-
 
 #endif
 
