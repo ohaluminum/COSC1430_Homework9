@@ -73,8 +73,8 @@ int measureLines(ifstream& inFile)
 int main()
 {
     int numOfLines, numOfElements;
-	string fileName, dataType;
-	cin >> fileName >> dataType;
+    string fileName, dataType;
+    cin >> fileName >> dataType;
     ifstream inFile(fileName);
 
     try
